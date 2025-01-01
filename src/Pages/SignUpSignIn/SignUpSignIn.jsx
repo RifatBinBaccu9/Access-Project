@@ -3,10 +3,11 @@ import { useState } from "react";
 
 
 const SignUpSignIn = () => {
+    
     const [post, setPost]=useState({
         email: " ",
         password: " "
-    })
+    });
 
     const handleCheange = event =>{
        const value=event.target.value
@@ -17,8 +18,13 @@ const SignUpSignIn = () => {
     const handleSubmit= event =>{
         event.preventDefault();
 
-        axios.post('https://jsonplaceholder.typicode.com/posts', {post})
-        .then(res => console.log(res.data.post)
+        const userData = {
+            email: post.email,
+            password: post.password
+          };
+
+        axios.post('https://jsonplaceholder.typicode.com/posts', userData)
+        .then(res => console.log(res.data)
         )
     }
     return (
@@ -42,6 +48,7 @@ const SignUpSignIn = () => {
                 placeholder="Enter your password"
                 name="password"
                 id="password"
+                autoComplete="on"
                 className=" ml-3 px-3 py-1 rounded-sm"
                 onChange={handleCheange}
                 />
@@ -49,13 +56,6 @@ const SignUpSignIn = () => {
             
             <div className=" text-center my-4">
             <button type="submit" className="btn">SignIn</button>
-            </div>
-            
-            <hr className=" my-4 w-[80%] mx-auto"/>
-
-            <div className=" text-center my-4">
-                <button className="btn text-purple-500 mr-2">Sign Up</button>
-                <button className="btn text-emerald-500 ml-2">Sign In</button>
             </div>
             </form>
         </div>
